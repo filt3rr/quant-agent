@@ -238,7 +238,7 @@ All pipeline settings can be changed at runtime via the dashboard (`/api/config`
 | Database | SQLite (WAL mode) |
 | Data analysis | Pandas, NumPy, pandas-ta |
 | Market data | Polygon.io, Alpaca, Finnhub, CoinGecko, yfinance |
-| LLM (cloud) | Anthropic Claude (claude-sonnet-4) |
+| LLM (cloud) | Anthropic Claude (claude-sonnet-4-6) |
 | LLM (local) | LM Studio — Qwen2.5-Coder-7B-Instruct |
 | News search | Tavily (optional) |
 | Deployment | Docker + Docker Compose |
