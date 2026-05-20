@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  quant_agent:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: quant_agent:latest
+    container_name: quant_agent
+    restart: unless-stopped
+    ports:
+      - "8765:8765"
+    env_file:
+      - ../.env
+    environment:
+      - DASHBOARD_PORT=8765
+      - LOG_LEVEL=INFO
+    volumes:
+      # Persist data across container restarts
+      - ../storage:/app/storage
+      - ../logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8765/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Optional: local LLM via LM Studio (comment out if using Anthropic)
+  # lm_studio:
+  #   image: lmstudio/lmstudio:latest
+  #   container_name: lm_studio
+  #   restart: unless-stopped
+  #   ports:
+  #     - "1234:1234"
+  #   volumes:
+  #     - lm_models:/root/.lmstudio/models
+  #   environment:
+  #     - LLM_LOCAL_URL=http://lm_studio:1234/v1
+
+# volumes:
+#   lm_models:
